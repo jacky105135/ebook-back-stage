@@ -7,7 +7,8 @@ router.get('/', function(req, res, next) {
   var db = req.con;
   var data = "";
 
-  db.query('SELECT * FROM website.member', function(err, rows) {
+  
+  db.query('SELECT * FROM website.member ORDER BY username ASC', function(err, rows) {
       if (err) {
           console.log(err);
       }
@@ -30,21 +31,37 @@ router.get('/add', function(req, res, next){
 router.post('/userAdd', function(req, res, next) {
 
     var db = req.con;
-
-    var sql = {
-        username: req.body.username,
-        password: req.body.password,
-        email: req.body.email
-    };
-
-    //console.log(sql);
-    var qur = db.query('INSERT INTO website.member SET ?', sql, function(err, rows) {
+    //var username = req.body.username;
+    var qur = db.query('SELECT username FROM website.member WHERE username = ?', req.body.username, function(err, rows) {
         if (err) {
             console.log(err);
         }
-        res.setHeader('Content-Type', 'application/json');
-        res.redirect('/');
+
+        var count = rows.length;
+        if (count > 0) {
+
+            var msg = 'Username already exists.';
+            res.render('userAdd', { title: 'Add User', msg: msg });
+
+        } else {
+
+            var sql = {
+                username: req.body.username,
+                password: req.body.password,
+                email: req.body.email
+            };
+
+            //console.log(sql);
+            var qur = db.query('INSERT INTO website.member SET ?', sql, function(err, rows) {
+                if (err) {
+                    console.log(err);
+                }
+                res.setHeader('Content-Type', 'application/json');
+                res.redirect('/');
+            });
+        }
     });
+
 
 });
 
