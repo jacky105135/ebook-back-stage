@@ -1,0 +1,44 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+table th,
+table td {
+    height: 30px;
+    min-width: 100px;
+    padding: 8px;
+    text-align: center;
+    font-size: 1.2em;
+    border-bottom: 1px solid #ddd;
+}
+
+table{
+  border-collapse: collapse;
+  width: 100%;
+}
+
+input[type=submit]{
+  padding:5px 25px; 
+    background:#50C878; 
+    border:0 none;
+    cursor:pointer;
+    font-family: monospace;
+    color:#FFFFFF;
+    font-size: 14px;
+    margin-bottom: 10px
+}
+
+input[type=button]{
+  padding:5px 25px; 
+    background:#50C878; 
+    border:0 none;
+    cursor:pointer;
+    font-family: monospace;
+    color:#FFFFFF;
+    font-size: 14px;
+}

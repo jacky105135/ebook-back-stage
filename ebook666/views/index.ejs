@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= "會員系統" %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+
+    <script>
+            function Edit(username) {
+                window.location.href = "/userEdit/" + username;
+            }
+            function Delete(username) {
+                var rs = confirm('Confirm to delete?');
+                if (rs) {
+                    window.location.href = "/userDelete/" + username;
+                }
+            }
+            function Search() {
+                var userid = document.getElementsByName('suserid')[0].value;
+                window.location.href = "/?user=" + userid;;
+            }
+            </script>
+
+  </head>
+  <body>
+    <h1>Member - List</h1>
+    <input type='submit' value='Add' onclick="javascript: location.href='add'">
+
+    <table>
+        <tr>
+            <th>username</th>
+            <th>password</th>
+            <th>email</th>
+            <th></th>
+        </tr>
+        <% for ( var i = 0 ; i < data.length ; i++){ %>
+            <tr>
+                <td >
+                    <%= data[i].username  %>
+                </td>
+                <td>
+                    <%= data[i].password  %>
+                </td>
+                <td>
+                    <%= data[i].email  %>
+                </td>
+                <td>
+                    <input type="button" name="edit" value="Edit" onclick="Edit('<%= data[i].username  %>');" />
+                    <input type="button" name="delete" value="Delete" onclick="Delete('<%= data[i].username  %>');" />
+                </td>
+            </tr>
+            <% } %>
+    </table>
+  </body>
+</html>
